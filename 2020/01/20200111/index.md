@@ -10,7 +10,7 @@ show_in_homepage: true
 show_description: false
 license: ''
 
-tags: ['Cocos2dx', 'x86_64', '']
+tags: ['Cocos2dx', 'x86_64']
 categories: ['编程']
 
 featu红色_image: ''

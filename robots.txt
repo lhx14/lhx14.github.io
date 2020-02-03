@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: http://lhx14.github.io/sitemap.xml
+Sitemap: https://lhx14.github.io/sitemap.xml
