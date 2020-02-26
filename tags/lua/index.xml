@@ -7,18 +7,36 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 02 Feb 2020 16:22:42 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://lhx14.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>TODO</title>
-      <link>https://lhx14.github.io/2020/02/20200202/</link>
-      <pubDate>Sun, 02 Feb 2020 16:22:42 +0800</pubDate>
+      <title>《Lua程序设计》读书笔记</title>
+      <link>https://lhx14.github.io/2020/02/20200214/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://lhx14.github.io/2020/02/20200202/</guid>
+      <guid>https://lhx14.github.io/2020/02/20200214/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Lua中的那些陷阱</title>
+      <link>https://lhx14.github.io/2020/01/20200130/</link>
+      <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://lhx14.github.io/2020/01/20200130/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cocos2dx-lua支持x86_64解决方案</title>
+      <link>https://lhx14.github.io/2020/01/20200111/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://lhx14.github.io/2020/01/20200111/</guid>
+      <description>前不久收到了 Google Play 的警告邮件，要求上架的app需要对每个原生 32 位架构，都必须同时提供相应的 64 位架构。 例如： 对于 ARM 架构，有 armeabi-v7a (32 位) 就必须有 arm64-v8a (64 位</description>
     </item>
     
   </channel>
