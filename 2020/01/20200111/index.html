@@ -1,53 +1,297 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Cocos2dx-lua支持x86_64解决方案 | 梦叶离</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=Description content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"><link rel=next href=https://lhx14.github.io/2020/01/20200128/><link rel=canonical href=https://lhx14.github.io/2020/01/20200111/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta property="og:title" content="Cocos2dx-lua支持x86_64解决方案"><meta property="og:description" content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"><meta property="og:type" content="article"><meta property="og:url" content="https://lhx14.github.io/2020/01/20200111/"><meta property="article:published_time" content="2020-01-11T00:00:00+00:00"><meta property="article:modified_time" content="2020-02-26T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Cocos2dx-lua支持x86_64解决方案"><meta name=twitter:description content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Cocos2dx-lua支持x86_64解决方案","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/lhx14.github.io\/2020\/01\/20200111\/"},"image":{"@type":"ImageObject","url":"https:\/\/lhx14.github.io\/cover.png","width":800,"height":600},"genre":"posts","keywords":"Cocos2d-x, Lua, Android, x86_64","wordcount":1485,"url":"https:\/\/lhx14.github.io\/2020\/01\/20200111\/","datePublished":"2020-01-11T00:00:00\x2b00:00","dateModified":"2020-02-26T00:00:00\x2b00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"lihaoxuan","logo":{"@type":"ImageObject","url":"https:\/\/lhx14.github.io\/logo.png","width":127,"height":40}},"description":"对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"}</script><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.css></head><body><script>window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><nav class=navbar><div class=navbar-container><div class="navbar-header animated bounceIn"><a href=https://lhx14.github.io/>梦叶离</a></div><div class=navbar-menu><a class=menu-item href=https://lhx14.github.io/posts>文章</a><a class=menu-item href=https://lhx14.github.io/tags>标签</a><a class=menu-item href=https://lhx14.github.io/categories>分类</a><a class=menu-item href=https://lhx14.github.io/about>关于</a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title=切换主题></i></a></div></div></nav><nav class=navbar-mobile><div class=navbar-container><div class=navbar-header><div class="navbar-header-title animated bounceIn"><a href=https://lhx14.github.io/>梦叶离</a></div><div class=menu-toggle id=menu-toggle><span></span><span></span><span></span></div></div><div class=navbar-menu id=mobile-menu><a class=menu-item href=https://lhx14.github.io/posts>文章</a><a class=menu-item href=https://lhx14.github.io/tags>标签</a><a class=menu-item href=https://lhx14.github.io/categories>分类</a><a class=menu-item href=https://lhx14.github.io/about>关于</a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title=切换主题></i></a></div></div></nav><main class=main><div class=container><article class=page><h1 class="post-title animated flipInX">Cocos2dx-lua支持x86_64解决方案</h1><div class=post-meta><div class=post-meta-main><a class=author href=https://lihaoxuan.me/ rel=author target=_blank><i class="fas fa-user-circle fa-fw"></i>lihaoxuan
-</a>&nbsp;<span class=post-category>收录于&nbsp;<i class="far fa-folder fa-fw"></i><a href=https://lhx14.github.io/categories/%E7%BC%96%E7%A8%8B/>编程</a>&nbsp;</span></div><div class=post-meta-other><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-01-11>2020-01-11</time>&nbsp;
-<i class="fas fa-pencil-alt fa-fw"></i>约 1485 字&nbsp;
-<i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;<span id=/2020/01/20200111/ class=leancloud_visitors data-flag-title=Cocos2dx-lua支持x86_64解决方案>
-<i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>次阅读
-</span>&nbsp;</div></div><div class=post-toc id=post-toc><h2 class=post-toc-title>目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#准备工作>准备工作</a><ul><li><a href=#第三方-sdk>第三方 SDK</a></li><li><a href=#cocos-动态库>Cocos 动态库</a></li></ul></li><li><a href=#配置--编译>配置 & 编译</a><ul><li><a href=#ndk-build-配置修改>ndk-build 配置修改</a></li><li><a href=#gradle-配置修改>gradle 配置修改</a></li><li><a href=#代码兼容>代码兼容</a></li></ul></li><li><a href=#开始测试>开始测试</a><ul><li><a href=#测试方法>测试方法</a></li><li><a href=#踩坑>踩坑</a></li></ul></li><li><a href=#后续>后续</a></li></ul></nav></div></div><div class=post-toc-mobile id=post-toc-mobile><details><summary><div class=post-toc-title><span>目录</span>
-<span><i class="details icon fas fa-angle-down"></i></span></div></summary><div class=post-toc-content><nav id=TableOfContentsMobile><ul><li><a href=#准备工作>准备工作</a><ul><li><a href=#第三方-sdk>第三方 SDK</a></li><li><a href=#cocos-动态库>Cocos 动态库</a></li></ul></li><li><a href=#配置--编译>配置 & 编译</a><ul><li><a href=#ndk-build-配置修改>ndk-build 配置修改</a></li><li><a href=#gradle-配置修改>gradle 配置修改</a></li><li><a href=#代码兼容>代码兼容</a></li></ul></li><li><a href=#开始测试>开始测试</a><ul><li><a href=#测试方法>测试方法</a></li><li><a href=#踩坑>踩坑</a></li></ul></li><li><a href=#后续>后续</a></li></ul></nav></div></details></div><div class=post-content><p>前不久收到了 Google Play 的警告邮件，要求上架的app需要对每个原生 32 位架构，都必须同时提供相应的 64 位架构。</p><p>例如：</p><ul><li>对于 ARM 架构，有 armeabi-v7a (32 位) 就必须有 arm64-v8a (64 位)。</li><li>对于 x86 架构，有 x86 (32 位) 就必须有 x86_64 (64 位)。</li></ul><p>本文详细介绍了对于 Cocos 版本比较老的游戏项目，如何能够支持 x86_64 的解决方案与踩坑。希望对有同样需求的伙伴有所帮助。</p><a class=post-dummy-target id=准备工作></a><h2>准备工作</h2><p>首先利用官方给出的方法<a href="https://developer.android.google.cn/distribute/best-practices/develop/64-bit?hl=zh-cn#apk-analyzer" target=_blank> 使用 APK 分析器查找原生库 </a>，可以看到项目所支持的架构以及用到的so文件。如果你当前的应用没有支持 x86 就不需要额外再做对 x86_64 的支持了。</p><p>接下来对照上面所有缺少的so文件分别寻找其 x86_64 版本。可分为三类：</p><ol><li>项目自身依赖的库。</li><li>接入第三方 SDK 时依赖的库。如 Bugly ，极光推送等。</li><li>Cocos 依赖的第三方库。</li></ol><p>由于我们自己开发的 SDK 已经支持了 x86_64 ，所以下面分别说明后两种 so 文件的解决方案。</p><a class=post-dummy-target id=第三方-sdk></a><h3>第三方 SDK</h3><p>对于游戏接入的第三方 SDK ，如果是比较新的 SDK ，一般官方会直接提供 x86_64 的 so 文件；而对于那些比较老的库，可以尝试根据当前的版本号来下载旧版本。有的官网不提供旧版本的下载链接，可以去 github 上通过历史提交记录查找。找到对应版本的 SDK 后，如果没有提供 x86_64 的动态库，需要下载源文件，重新编译。</p><p>Tips: 下载现成的动态库时，可以把其他已有架构的 so 文件一并下载，然后通过 Beyond Compare 的十六进制比较功能，与项目中已有的 so 文件进行对比，确保动态库版本的一致性。</p><a class=post-dummy-target id=cocos-动态库></a><h3>Cocos 动态库</h3><p>这里我根据 Android.mk 文件，使用<a href=https://www.processon.com target=_blank> ProcessOn </a>提供的思维导图功能，针对我们的项目整理了 cocos2dx_lua_static 的依赖树：</p><p><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/images/20200111/cocos2d_lua_static.png alt="Cocos 第三方库依赖关系" class=lazyload><figcaption class=image-caption>Cocos 第三方库依赖关系</figcaption></figure></p><p>其中绿色的部分只依赖了静态库，蓝色则是我们需要关注的 so 文件。可以看到，Cocos 有很多第三方库，如果一个一个寻找需要花费大量的时间。Cocos团队虽然明确说了不提供对 x86_64 的支持，但是帮助我们整理了所有第三方库的对应版本和源文件，方便我们重新编译。</p><p>首先通过cocos目录下的<code>external/version.json</code>文件，可以看到当前各个库的版本。利用此文件从这个<a href=https://github.com/cocos2d/cocos2d-x-3rd-party-libs-src target=_blank> github 链接 </a>中找到相匹配的版本并 clone 源代码。</p><p>然后运行脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>./build.sh -p<span class=o>=</span>android --libs<span class=o>=</span>all --arch<span class=o>=</span>x86_64 --mode<span class=o>=</span>release
-</code></pre></td></tr></table></div></div><p>将生成的 so 文件放到项目中对应的 x86_64 文件夹中即可。</p><a class=post-dummy-target id=配置--编译></a><h2>配置 & 编译</h2><p>由于历史原因，我们项目采用的是先用 ndk-build 对 cocos 相关的库和 wwise 库进行编译，然后再通过 gradle 编译。首先需要在配置文件中添加 x86_64 :</p><a class=post-dummy-target id=ndk-build-配置修改></a><h3>ndk-build 配置修改</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-mk data-lang=mk><span class=c># Application.mk
-</span><span class=c></span><span class=nv>APP_ABI</span> <span class=o>:=</span> armeabi-v7a arm64-v8a x86 x86_64
-</code></pre></td></tr></table></div></div><a class=post-dummy-target id=gradle-配置修改></a><h3>gradle 配置修改</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-gradle data-lang=gradle><span class=c1>// build.gradle
-</span><span class=c1></span><span class=n>android</span> <span class=o>{</span>
-    <span class=n>defaultConfig</span> <span class=o>{</span>
-        <span class=n>ndk</span> <span class=o>{</span>
-            <span class=n>abiFilters</span> <span class=s1>&#39;armeabi-v7a&#39;</span><span class=o>,</span> <span class=s1>&#39;arm64-v8a&#39;</span><span class=o>,</span> <span class=s1>&#39;x86&#39;</span><span class=o>,</span> <span class=s1>&#39;x86_64&#39;</span>
-        <span class=o>}</span>
-    <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></td></tr></table></div></div><p>如果使用了bugly，记得在生成和上传符号表时添加 x86_64 。</p><a class=post-dummy-target id=代码兼容></a><h3>代码兼容</h3><p>在编译阶段还要注意的一点是对 32 位代码移植 64 位的处理，比如在编译 cocos 第三方库 curl 时需要对数据类型做兼容。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c++ data-lang=c++><span class=cp>#</span><span class=cp>if defined(__aarch64__) || defined(__x86_64__)</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_SIZEOF_LONG            8</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_TYPEOF_CURL_OFF_T      long</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_FORMAT_CURL_OFF_T      &#34;ld&#34;</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_FORMAT_CURL_OFF_TU     &#34;lu&#34;</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_FORMAT_OFF_T           &#34;%ld&#34;</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_SIZEOF_CURL_OFF_T      8</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_SUFFIX_CURL_OFF_T      L</span><span class=cp>
-</span><span class=cp></span><span class=cp>#</span><span class=cp>define CURL_SUFFIX_CURL_OFF_TU     UL</span><span class=cp>
-</span></code></pre></td></tr></table></div></div><p>如果这些在去年升级 arm64 的时候已经做过了，这一步会比较轻松。</p><a class=post-dummy-target id=开始测试></a><h2>开始测试</h2><a class=post-dummy-target id=测试方法></a><h3>测试方法</h3><p>执行完上述的几个步骤后，就可以开始测试了。目前市面上还没有 64 位的 x86 安卓设备，只能从 Android Studio 上配置 x86_64 的安卓模拟器。安装 apk 的时候需要配合<code>--abi</code>参数使用 adb 安装，指定使用我们新加的 x86_64 ，或者也可以直接出一个只带有 x86_64 库的包，确保应用运行时用的不是老的 x86 库。</p><a class=post-dummy-target id=踩坑></a><h3>踩坑</h3><p>在第一次测试时，我们的游戏一启动就会闪退。通过调查报错日志，发现当前版本的 luagit 不支持 64 位的 x86 架构，导致创建 lua state 失败。于是从 luagit 官网下载了最低支持的版本 2.0.5 ，重新编译、打包、安装后就可以正常进入游戏了。</p><a class=post-dummy-target id=后续></a><h2>后续</h2><p>Google 并不要求支持所有的 64 位架构，但是对于已经支持的每种原生 32 位架构，就必须包含对应的 64 位架构。</p><p>在实际开发的过程中，我们一些 SDK 的 x86_64 来不及测试，也很难测试（没有 x86_64 的设备），无法保证其稳定性。因为 pc 上大部分的 x86 模拟器可以通过翻译 ARM 来正常运行游戏，所以最终我们决定去掉对 x86 的支持来满足谷歌的要求。目前线上的各种手机跑起来没有发现问题，同时也减小了整个安装包的体积。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2020-02-26 更新</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href="//twitter.com/share?url=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f&text=Cocos2dx-lua%e6%94%af%e6%8c%81x86_64%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88&via=" target=_blank title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f" target=_blank title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a href="//reddit.com/submit?url=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f&title=Cocos2dx-lua%e6%94%af%e6%8c%81x86_64%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" target=_blank title="分享到 Reddit"><i class="fab fa-reddit fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span class=tag><a href=https://lhx14.github.io/tags/cocos2d-x/><i class="fas fa-tag fa-fw"></i>&nbsp;Cocos2d-x</a>&nbsp;
-</span><span class=tag><a href=https://lhx14.github.io/tags/lua/><i class="fas fa-tag fa-fw"></i>&nbsp;Lua</a>&nbsp;
-</span><span class=tag><a href=https://lhx14.github.io/tags/android/><i class="fas fa-tag fa-fw"></i>&nbsp;Android</a>&nbsp;
-</span><span class=tag><a href=https://lhx14.github.io/tags/x86_64/><i class="fas fa-tag fa-fw"></i>&nbsp;x86_64</a>&nbsp;</span></section><section><span><a href=javascript:window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=https://lhx14.github.io/>主页</a></span></section></div><div class=post-nav><a href=https://lhx14.github.io/2020/01/20200128/ class=next rel=next title=网络同步模型与实现要点>网络同步模型与实现要点<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=post-comment><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
-return;var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;var disqus_shortname="lihaoxuan";dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div id=vcomments></div><script src=/js/lib/valine/Valine.min.min.js></script><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
-return;new Valine({el:"#vcomments",appId:"0f80DVkuAvSXj8x6wQWfQ7zY-gzGzoHsz",appKey:"gVLUrcgD6BE9Sr7yrCpeKxWm",meta:["nick","mail"],notify:"false",verify:"true",avatar:"mp",placeholder:"Your comment ...",visitor:"true",recordIP:"true",lang:"zh-cn",});})();</script><noscript>Please enable JavaScript to view the <a href=https://valine.js.org/>comments powered by Valine.</a></noscript></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>由 <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://lhx14.github.io/ target=_blank>lihaoxuan</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><a href=# class=dynamic-to-top id=dynamic-to-top data-scroll><span>&nbsp;</span></a>
-<script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-157528559-1','auto');ga('set','anonymizeIp',true);ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script src=/js/lib/jquery/jquery.slim.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.js></script><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js></script><script>window.scroll=new SmoothScroll('[data-scroll]',{speed:300,speedAsDuration:true});</script><script src=/js/blog.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cocos2dx-lua支持x86_64解决方案 | 梦叶离</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"><link rel="next" href="https://lhx14.github.io/2020/01/20200128/" /><link rel="canonical" href="https://lhx14.github.io/2020/01/20200111/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta property="og:title" content="Cocos2dx-lua支持x86_64解决方案" />
+<meta property="og:description" content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lhx14.github.io/2020/01/20200111/" />
+<meta property="article:published_time" content="2020-01-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cocos2dx-lua支持x86_64解决方案"/>
+<meta name="twitter:description" content="对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cocos2dx-lua支持x86_64解决方案",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/lhx14.github.io\/2020\/01\/20200111\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/lhx14.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Cocos2d-x, Lua, Android, x86_64","wordcount":  1485 ,
+        "url": "https:\/\/lhx14.github.io\/2020\/01\/20200111\/","datePublished": "2020-01-11T00:00:00\x2b00:00","dateModified": "2020-02-26T00:00:00\x2b00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "lihaoxuan",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/lhx14.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": "对于老版本的Cocos2dx-lua游戏项目，支持x86_64的解决方案和踩坑"
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://lhx14.github.io/">梦叶离</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item" href="https://lhx14.github.io/posts" title="">文章</a><a class="menu-item" href="https://lhx14.github.io/tags" title="">标签</a><a class="menu-item" href="https://lhx14.github.io/categories" title="">分类</a><a class="menu-item" href="https://lhx14.github.io/about" title="">关于</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://lhx14.github.io/">梦叶离</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://lhx14.github.io/posts" title="">文章</a><a class="menu-item" href="https://lhx14.github.io/tags" title="">标签</a><a class="menu-item" href="https://lhx14.github.io/categories" title="">分类</a><a class="menu-item" href="https://lhx14.github.io/about" title="">关于</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">Cocos2dx-lua支持x86_64解决方案</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://lihaoxuan.me/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lihaoxuan
+                </a>&nbsp;<span class="post-category">收录于&nbsp;<i class="far fa-folder fa-fw"></i><a href="https://lhx14.github.io/categories/%E7%BC%96%E7%A8%8B/">编程</a>&nbsp;</span></div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-01-11>2020-01-11</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 1485 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;</div>
+        </div><div class="post-toc" id="post-toc">
+                <h2 class="post-toc-title">目录</h2>
+                <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备工作">准备工作</a>
+      <ul>
+        <li><a href="#第三方-sdk">第三方 SDK</a></li>
+        <li><a href="#cocos-动态库">Cocos 动态库</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置--编译">配置 & 编译</a>
+      <ul>
+        <li><a href="#ndk-build-配置修改">ndk-build 配置修改</a></li>
+        <li><a href="#gradle-配置修改">gradle 配置修改</a></li>
+        <li><a href="#代码兼容">代码兼容</a></li>
+      </ul>
+    </li>
+    <li><a href="#开始测试">开始测试</a>
+      <ul>
+        <li><a href="#测试方法">测试方法</a></li>
+        <li><a href="#踩坑">踩坑</a></li>
+      </ul>
+    </li>
+    <li><a href="#后续">后续</a></li>
+  </ul>
+</nav></div>
+            </div>
+            <div class="post-toc-mobile" id="post-toc-mobile">
+                <details>
+                    <summary>
+                        <div class="post-toc-title">
+                            <span>目录</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
+                    <div class="post-toc-content"><nav id="TableOfContentsMobile">
+  <ul>
+    <li><a href="#准备工作">准备工作</a>
+      <ul>
+        <li><a href="#第三方-sdk">第三方 SDK</a></li>
+        <li><a href="#cocos-动态库">Cocos 动态库</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置--编译">配置 & 编译</a>
+      <ul>
+        <li><a href="#ndk-build-配置修改">ndk-build 配置修改</a></li>
+        <li><a href="#gradle-配置修改">gradle 配置修改</a></li>
+        <li><a href="#代码兼容">代码兼容</a></li>
+      </ul>
+    </li>
+    <li><a href="#开始测试">开始测试</a>
+      <ul>
+        <li><a href="#测试方法">测试方法</a></li>
+        <li><a href="#踩坑">踩坑</a></li>
+      </ul>
+    </li>
+    <li><a href="#后续">后续</a></li>
+  </ul>
+</nav></div>
+                </details>
+            </div><div class="post-content"><p>前不久收到了 Google Play 的警告邮件，要求上架的app需要对每个原生 32 位架构，都必须同时提供相应的 64 位架构。</p>
+<p>例如：</p>
+<ul>
+<li>对于 ARM 架构，有 armeabi-v7a (32 位) 就必须有 arm64-v8a (64 位)。</li>
+<li>对于 x86 架构，有 x86 (32 位) 就必须有 x86_64 (64 位)。</li>
+</ul>
+<p>本文详细介绍了对于 Cocos 版本比较老的游戏项目，如何能够支持 x86_64 的解决方案与踩坑。希望对有同样需求的伙伴有所帮助。</p>
+<a class="post-dummy-target" id="准备工作"></a><h2>准备工作</h2>
+<p>首先利用官方给出的方法<a href="https://developer.android.google.cn/distribute/best-practices/develop/64-bit?hl=zh-cn#apk-analyzer" target="_blank"> 使用 APK 分析器查找原生库 </a>，可以看到项目所支持的架构以及用到的so文件。如果你当前的应用没有支持 x86 就不需要额外再做对 x86_64 的支持了。</p>
+<p>接下来对照上面所有缺少的so文件分别寻找其 x86_64 版本。可分为三类：</p>
+<ol>
+<li>项目自身依赖的库。</li>
+<li>接入第三方 SDK 时依赖的库。如 Bugly ，极光推送等。</li>
+<li>Cocos 依赖的第三方库。</li>
+</ol>
+<p>由于我们自己开发的 SDK 已经支持了 x86_64 ，所以下面分别说明后两种 so 文件的解决方案。</p>
+<a class="post-dummy-target" id="第三方-sdk"></a><h3>第三方 SDK</h3>
+<p>对于游戏接入的第三方 SDK ，如果是比较新的 SDK ，一般官方会直接提供 x86_64 的 so 文件；而对于那些比较老的库，可以尝试根据当前的版本号来下载旧版本。有的官网不提供旧版本的下载链接，可以去 github 上通过历史提交记录查找。找到对应版本的 SDK 后，如果没有提供 x86_64 的动态库，需要下载源文件，重新编译。</p>
+<p>Tips: 下载现成的动态库时，可以把其他已有架构的 so 文件一并下载，然后通过 Beyond Compare 的十六进制比较功能，与项目中已有的 so 文件进行对比，确保动态库版本的一致性。</p>
+<a class="post-dummy-target" id="cocos-动态库"></a><h3>Cocos 动态库</h3>
+<p>这里我根据 Android.mk 文件，使用<a href="https://www.processon.com" target="_blank"> ProcessOn </a>提供的思维导图功能，针对我们的项目整理了 cocos2dx_lua_static 的依赖树：</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/images/20200111/cocos2d_lua_static.png" alt="Cocos 第三方库依赖关系" class="lazyload"><figcaption class="image-caption">Cocos 第三方库依赖关系</figcaption></figure></p>
+<p>其中绿色的部分只依赖了静态库，蓝色则是我们需要关注的 so 文件。可以看到，Cocos 有很多第三方库，如果一个一个寻找需要花费大量的时间。Cocos团队虽然明确说了不提供对 x86_64 的支持，但是帮助我们整理了所有第三方库的对应版本和源文件，方便我们重新编译。</p>
+<p>首先通过cocos目录下的<code>external/version.json</code>文件，可以看到当前各个库的版本。利用此文件从这个<a href="https://github.com/cocos2d/cocos2d-x-3rd-party-libs-src" target="_blank"> github 链接 </a>中找到相匹配的版本并 clone 源代码。</p>
+<p>然后运行脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">./build.sh -p<span class="o">=</span>android --libs<span class="o">=</span>all --arch<span class="o">=</span>x86_64 --mode<span class="o">=</span>release
+</code></pre></td></tr></table>
+</div>
+</div><p>将生成的 so 文件放到项目中对应的 x86_64 文件夹中即可。</p>
+<a class="post-dummy-target" id="配置--编译"></a><h2>配置 &amp; 编译</h2>
+<p>由于历史原因，我们项目采用的是先用 ndk-build 对 cocos 相关的库和 wwise 库进行编译，然后再通过 gradle 编译。首先需要在配置文件中添加 x86_64 :</p>
+<a class="post-dummy-target" id="ndk-build-配置修改"></a><h3>ndk-build 配置修改</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-mk" data-lang="mk"><span class="c"># Application.mk
+</span><span class="c"></span><span class="nv">APP_ABI</span> <span class="o">:=</span> armeabi-v7a arm64-v8a x86 x86_64
+</code></pre></td></tr></table>
+</div>
+</div><a class="post-dummy-target" id="gradle-配置修改"></a><h3>gradle 配置修改</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// build.gradle
+</span><span class="c1"></span><span class="n">android</span> <span class="o">{</span>
+    <span class="n">defaultConfig</span> <span class="o">{</span>
+        <span class="n">ndk</span> <span class="o">{</span>
+            <span class="n">abiFilters</span> <span class="s1">&#39;armeabi-v7a&#39;</span><span class="o">,</span> <span class="s1">&#39;arm64-v8a&#39;</span><span class="o">,</span> <span class="s1">&#39;x86&#39;</span><span class="o">,</span> <span class="s1">&#39;x86_64&#39;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果使用了bugly，记得在生成和上传符号表时添加 x86_64 。</p>
+<a class="post-dummy-target" id="代码兼容"></a><h3>代码兼容</h3>
+<p>在编译阶段还要注意的一点是对 32 位代码移植 64 位的处理，比如在编译 cocos 第三方库 curl 时需要对数据类型做兼容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#</span><span class="cp">if defined(__aarch64__) || defined(__x86_64__)</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_SIZEOF_LONG            8</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_TYPEOF_CURL_OFF_T      long</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_FORMAT_CURL_OFF_T      &#34;ld&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_FORMAT_CURL_OFF_TU     &#34;lu&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_FORMAT_OFF_T           &#34;%ld&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_SIZEOF_CURL_OFF_T      8</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_SUFFIX_CURL_OFF_T      L</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">define CURL_SUFFIX_CURL_OFF_TU     UL</span><span class="cp">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如果这些在去年升级 arm64 的时候已经做过了，这一步会比较轻松。</p>
+<a class="post-dummy-target" id="开始测试"></a><h2>开始测试</h2>
+<a class="post-dummy-target" id="测试方法"></a><h3>测试方法</h3>
+<p>执行完上述的几个步骤后，就可以开始测试了。目前市面上还没有 64 位的 x86 安卓设备，只能从 Android Studio 上配置 x86_64 的安卓模拟器。安装 apk 的时候需要配合<code>--abi</code>参数使用 adb 安装，指定使用我们新加的 x86_64 ，或者也可以直接出一个只带有 x86_64 库的包，确保应用运行时用的不是老的 x86 库。</p>
+<a class="post-dummy-target" id="踩坑"></a><h3>踩坑</h3>
+<p>在第一次测试时，我们的游戏一启动就会闪退。通过调查报错日志，发现当前版本的 luagit 不支持 64 位的 x86 架构，导致创建 lua state 失败。于是从 luagit 官网下载了最低支持的版本 2.0.5 ，重新编译、打包、安装后就可以正常进入游戏了。</p>
+<a class="post-dummy-target" id="后续"></a><h2>后续</h2>
+<p>Google 并不要求支持所有的 64 位架构，但是对于已经支持的每种原生 32 位架构，就必须包含对应的 64 位架构。</p>
+<p>在实际开发的过程中，我们一些 SDK 的 x86_64 来不及测试，也很难测试（没有 x86_64 的设备），无法保证其稳定性。因为 pc 上大部分的 x86 模拟器可以通过翻译 ARM 来正常运行游戏，所以最终我们决定去掉对 x86 的支持来满足谷歌的要求。目前线上的各种手机跑起来没有发现问题，同时也减小了整个安装包的体积。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-02-26 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"><span><a href="//twitter.com/share?url=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f&amp;text=Cocos2dx-lua%e6%94%af%e6%8c%81x86_64%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88&amp;via=" target="_blank" title="分享到 Twitter">
+            <i class="fab fa-twitter fa-fw"></i>
+        </a><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f" target="_blank" title="分享到 Facebook">
+            <i class="fab fa-facebook-square fa-fw"></i>
+        </a><a href="//reddit.com/submit?url=https%3a%2f%2flhx14.github.io%2f2020%2f01%2f20200111%2f&amp;title=Cocos2dx-lua%e6%94%af%e6%8c%81x86_64%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" target="_blank" title="分享到 Reddit">
+            <i class="fab fa-reddit fa-fw"></i>
+        </a></span></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://lhx14.github.io/tags/cocos2d-x/"><i class="fas fa-tag fa-fw"></i>&nbsp;Cocos2d-x</a>&nbsp;
+                    </span><span class="tag">
+                        <a href="https://lhx14.github.io/tags/lua/"><i class="fas fa-tag fa-fw"></i>&nbsp;Lua</a>&nbsp;
+                    </span><span class="tag">
+                        <a href="https://lhx14.github.io/tags/android/"><i class="fas fa-tag fa-fw"></i>&nbsp;Android</a>&nbsp;
+                    </span><span class="tag">
+                        <a href="https://lhx14.github.io/tags/x86_64/"><i class="fas fa-tag fa-fw"></i>&nbsp;x86_64</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://lhx14.github.io/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="https://lhx14.github.io/2020/01/20200128/" class="next" rel="next" title="网络同步模型与实现要点">网络同步模型与实现要点<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://lhx14.github.io/" target="_blank">lihaoxuan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><script src="/js/blog.min.js"></script></body>
+</html>
